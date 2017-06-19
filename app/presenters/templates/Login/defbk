@@ -1,0 +1,24 @@
+{block title}Log in{/block}
+
+{block active}active-login{/block}
+
+{block content}
+
+<div class="login-wrapper modal">
+    <div class="modal-content">
+
+        <h1>Log in</h1>
+        {control loginForm}
+        <div><button id="btn-switch-login">I have no account here.</button></div>
+
+    </div>
+    <div class="modal-content">
+
+        <h1>Sign in</h1>
+        {control signinForm}
+        <div><button id="btn-switch-signin">I have got an account here.</button></div>
+
+    </div>
+</div>
+
+{/block}

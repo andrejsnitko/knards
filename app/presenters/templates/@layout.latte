@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Barrio|Nunito|Inconsolata" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" rel="stylesheet">
+    <link href="{$basePath}/css/bootstrap.css" rel="stylesheet">
+    <link href="{$basePath}/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="{$basePath}/css/bootstrap-tagsinput.css" rel="stylesheet">
+    <link href="{$basePath}/css/bootstrap-tagsinput-typeahead.css" rel="stylesheet">
+    <link href="{$basePath}/css/font-awesome.css" rel="stylesheet">
+    <link href="{$basePath}/css/bootstrap-custom.css" rel="stylesheet">
+    <link href="{$basePath}/css/main.css" rel="stylesheet">
+    <link href="{$basePath}/css/responsive.css" rel="stylesheet">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}KNARDS</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top{ifset active} {include active}{/ifset}">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            {* HAMBURGER GOES HERE *}
+          </button>
+          <a class="logo" n:href="Homepage:">KNARDS</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a id="btn-new" n:href="Cards:new">New Card</a></li>
+            <li><a id="btn-edit" n:href="Cards:list">Edit Cards</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Collections <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a n:href="Collections:"><i class="fa fa-edit fa-fw"></i>Manage Collections</a></li>
+                    {ifset $collectionsNames}
+                        {foreach $collectionsNames as $collection}
+                            {first}<li role="separator" class="divider"></li>{/first}
+                            <li><a n:href="Cards:revise $collection->id">{$collection->name}</a></li>
+                        {/foreach}
+                    {/ifset}
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"{ifset $userData} user-id="{$userData->getIdentity()->getId()}"{/ifset}>
+                    {ifset $userData}{$userData->getIdentity()->username}{else}Account{/ifset} <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                    {ifset $userData}
+                        <li><a n:href="Folders:">Folder Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a n:href="SignOut!">Log out</a></li>
+                    {/ifset}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+	{include content}
+
+	{block scripts}
+    <script src="{$basePath}/js/jquery.js"></script>
+    <script src="{$basePath}/js/moment.min.js"></script>
+    <script src="{$basePath}/js/nette.ajax.js"></script>
+    <script src="{$basePath}/js/bootstrap.js"></script>
+    <script src="{$basePath}/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="{$basePath}/js/bootstrap-tagsinput.js"></script>
+    <script src="{$basePath}/js/bloodhound.min.js"></script>
+    <script src="{$basePath}/js/typeahead.jquery.min.js"></script>
+	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+    <script src="{$basePath}/js/main.js"></script>
+	{/block}
+</body>
+</html>

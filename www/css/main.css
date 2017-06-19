@@ -1,0 +1,920 @@
+/***************** GENERAL *****************/ 
+html {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body {
+    height: 100%;
+
+    font-family: 'Nunito', sans-serif;
+    background-color: #d5d5d5;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+
+a:link, a:active, a:focus, a:visited, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.div-hide {
+    display: none;
+}
+
+.card-wrapper .card input,
+.card-wrapper .card span {
+    margin: 0 2px;
+    padding: 2px;
+    height: 24px;
+}
+
+.question {
+    color: #ff9505;
+    background-color: #ff9505;
+    border-radius: 3px;
+}
+
+.q-input {
+    background-color: #ffb349;
+    border: 1px solid #ffb349;
+    border-radius: 3px;
+}
+
+.right-answer,
+.wrong-answer {
+    color: #eaeaea;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.right-answer {
+    background-color: #6aad2b;
+    border-color: #6aad2b;
+}
+
+.wrong-answer {
+    background-color: #ad2b2b;
+    border-color: #ad2b2b;
+}
+
+.card-wrapper .card {
+    font-family: 'Inconsolata', monospace;
+    font-size: 18px;
+}
+
+.card-wrapper .card .date {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+}
+
+/***************** MODALS *****************/ 
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    height: 100%;
+    width: 100%;
+
+    z-index: 99; 
+    overflow: auto;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal > div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+.folders-confirm-delete > div {
+    width: 250px;
+    height: 150px;
+}
+
+.last-folder-delete > div {
+    width: 200px;
+    height: 150px;
+}
+
+.coll-complete > div {
+    width: 200px;
+    height: 160px;
+}
+
+.no-cards > div {
+    width: 250px;
+    height: 200px;
+}
+
+.folders-edit > div {
+    width: 400px;
+    height: 400px;
+}
+
+.coll-confirm-delete > div {
+    width: 250px;
+    height: 165px;
+}
+
+.ruleset-edit > div {
+    position: absolute;
+    top: 10%;
+    width: 400px;
+    min-height: 500px;
+}
+
+.last-folder-delete .modal-content,
+.no-cards .modal-content,
+.coll-complete .modal-content,
+.folders-edit .modal-content,
+.folders-confirm-delete .modal-content,
+.coll-confirm-delete .modal-content,
+.ruleset-edit .modal-content {
+    position: relative;
+    top: -50%;
+    left: -50%;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+
+    border-radius: 0;
+}
+
+.folders-confirm-delete .modal-content > div,
+.coll-confirm-delete .modal-content > div {
+    float: left;
+    margin: 0 2px;
+    width: 100px;
+}
+
+.last-folder-delete .modal-content > div,
+.coll-complete .modal-content > div,
+.no-cards .modal-content > div {
+    margin: 0 auto;
+    width: 100px;
+}
+
+.last-folder-delete .modal-content > div > a,
+.coll-complete .modal-content > div > a,
+.folders-confirm-delete .modal-content > div > a,
+.coll-confirm-delete .modal-content > div > a {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.last-folder-delete p,
+.no-cards p,
+.coll-complete p,
+.folders-confirm-delete p,
+.coll-confirm-delete p {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.no-cards p:first-child,
+.coll-confirm-delete p:first-child,
+.folders-confirm-delete p:first-child {
+    margin-bottom: 0;
+}
+
+/***************** NAVBAR *****************/ 
+nav.active-new #btn-new,
+nav.active-edit #btn-edit {
+    background-color: #2c5dad;
+}
+
+/***************** LOGIN *****************/ 
+.login-wrapper {
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    height: 100%;
+    width: 100%;
+
+    z-index: 99; 
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.login-wrapper > div {
+    flex-grow: 1;
+}
+
+.div-login, .div-signin {
+    padding: 30px;
+}
+
+.login-wrapper > .container-fluid {
+    margin: 0;
+}
+
+.div-login > form > table,
+.div-signin > form > table {
+    width: 100%;
+}
+
+.div-login > form > table label,
+.div-signin > form > table label {
+    margin: 0 5px 0 0;
+}
+
+.div-login > form > table td,
+.div-signin > form > table td {
+    display: inline-block;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.div-login > form > table td > input,
+.div-signin > form > table td > input {
+    width: 100%;
+}
+
+.div-login h1,
+.div-signin h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.div-login > div,
+.div-signin > div {
+    margin-top: 50px;
+}
+
+.div-login > div > button,
+.div-signin > div > button {
+    width: 100%;
+}
+
+/***************** MAIN CONTENT *****************/ 
+.knards-container {
+    padding: 50px;
+    height: 100%;
+
+    background-color: #fff;
+    box-shadow: 0px 1px 5px #757575;
+}
+
+.tags-desktop > .knards-container {
+    padding: 20px 20px 45px 20px;
+}
+
+.actions-desktop > .knards-container {
+    padding: 10px 20px 20px 20px;
+}
+
+.actions-desktop > .knards-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.list-cards-wrapper .actions-desktop > .knards-container {
+    display: block;
+}
+
+.list-cards-wrapper .actions-desktop > .knards-container > div {
+    margin-top: 10px;
+}
+
+.list-cards-wrapper .actions-desktop > .knards-container > div:first-child {
+    margin-bottom: 60px;
+}
+
+.homepage-wrapper,
+.new-card-wrapper,
+.edit-card-wrapper,
+.revise-card-wrapper,
+.folders-wrapper,
+.collections-wrapper,
+.homepage-wrapper .row,
+.new-card-wrapper .row,
+.edit-card-wrapper .row,
+.revise-card-wrapper .row,
+.folders-wrapper .row,
+.collections-wrapper .row {
+    height: 100%;
+}
+
+.homepage-wrapper > div,
+.new-card-wrapper > div,
+.edit-card-wrapper > div,
+.revise-card-wrapper > div,
+.folders-wrapper > div,
+.collections-wrapper > div {
+    height: 20%;
+}
+
+.homepage-wrapper > .container-fluid,
+.folders-wrapper > .container-fluid,
+.collections-wrapper > .container-fluid {
+    height: 500px;
+    max-height: 60%;
+}
+
+.homepage-wrapper > .container-fluid,
+.new-card-wrapper > .container-fluid,
+.edit-card-wrapper > .container-fluid,
+.revise-card-wrapper > .container-fluid,
+.folders-wrapper > .container-fluid,
+.collections-wrapper > .container-fluid,
+.tags-desktop {
+    height: 500px;
+}
+
+.actions-desktop {
+    margin-top: 100px;
+    height: 300px;
+}
+
+.list-cards-wrapper .card-wrapper {
+    margin-top: 50px;
+}
+
+.list-cards-wrapper .card-wrapper .card {
+    margin-top: 50px;
+}
+
+.card-wrapper,
+.card-wrapper > div,
+.card-wrapper > div > div {
+    height: 100%;
+}
+
+.tags-desktop,
+.actions-desktop {
+    position: fixed;
+    top: 20%;
+    width: 25%;
+}
+
+.tags-desktop {
+    left: 0;
+}
+
+.actions-desktop {
+    right: 0;
+}
+
+.tags-desktop > div,
+.actions-desktop > div {
+    margin: 0 auto 0 30px;
+    height: 100%;
+    width: 30%;
+    min-width: 180px;
+}
+
+.tags-desktop > div {
+    margin: 0 30px 0 auto;
+    width: 60%;
+    min-width: 220px;
+}
+
+.tags-desktop > div > div {
+    margin: 5px 0;
+    padding: 5px;
+    overflow-y: scroll;
+    height: 100%;
+
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.actions-desktop > div > div {
+    margin-top: auto;
+    width: 100%;
+}
+
+.actions-desktop .form-group {
+    margin-bottom: 0;
+}
+
+.actions-desktop > div > button {
+    margin-right: auto;
+}
+
+.actions-desktop > div > div > button {
+    width: 100%;
+}
+
+.card-link:link,
+.card-link:active,
+.card-link:visited,
+.card-link:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.card-link .card,
+.revise-card-wrapper .card-wrapper > div {
+    padding: 0;
+    height: 550px;
+
+    background-color: #fff;
+    box-shadow: 0px 1px 5px #757575;
+}
+
+.card-link .card > div:first-child,
+.revise-card-wrapper .card-wrapper > div > div:first-child {
+    margin-bottom: 50px;
+    padding: 20px;
+
+    background-color: #ddd;
+}
+
+.card-link .card > div:last-child,
+.revise-card-wrapper .card-wrapper > div > div:last-child {
+    padding: 0 50px 50px 50px;
+}
+
+.revise-card-wrapper .card-wrapper > div > div:first-child {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    height: 60px;
+}
+
+.revise-card-wrapper .card-wrapper > div > div:last-child {
+    height: initial;
+}
+
+.revise-card-wrapper .actions-desktop > div > div:first-child {
+    margin: 10px 0 auto 0;
+    height: 40px;
+}
+
+.revise-card-wrapper .actions-desktop > div > div:last-child {
+    margin: auto 0 0 0;
+}
+
+/***************** MAIN CONTENT *****************/ 
+/***************** FOLDERS & COLLECTIONS *****************/ 
+.div-folders > div,
+.div-collections > div {
+    padding: 5px;
+    overflow-y: scroll;
+    height: 100%;
+
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.div-folders > div > div > div:last-child,
+.div-collections > div > div > div:last-child {
+    margin-bottom: 30px;
+}
+
+.div-folders .folder, 
+.div-collections .ruleset {
+    margin-bottom: 5px;
+
+    border: 1px solid #ddd;
+}
+
+.div-folders .folder > .folder-heading,
+.div-collections .ruleset > .ruleset-heading {
+    padding: 5px 0 5px 5px;
+
+    text-align: center;
+    background-color: #ddd;
+}
+
+.folders-wrapper .folder div a,
+.collections-wrapper .ruleset div a {
+    float: right;
+
+    margin-right: 12px;
+
+    color: #161925;
+    font-size: inherit;
+}
+
+.folders-wrapper .folder div a:hover,
+.collections-wrapper .ruleset div a:hover {
+    color: #7c8483;
+    cursor: pointer;
+}
+
+.div-folders .folder-tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 5px;
+}
+
+.div-folders .folder-tags > div {
+    width: 100%;
+}
+
+.ruleset-info {
+    padding: 5px;
+}
+
+.folders-edit label,
+.ruleset-edit label {
+    margin: 5px;
+}
+
+.folders-edit input,
+.ruleset-edit input {
+    width: 100%;
+}
+
+.edit-folder-tags div {
+    height: 200px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.edit-ruleset-tags .bootstrap-tagsinput,
+.edit-ruleset-users .bootstrap-tagsinput {
+    width: 100%;
+    overflow-y: visible;
+}
+
+.folders-edit .modal-content > div:last-child {
+    margin: 30px 0;
+    height: 40px;
+}
+
+.ruleset-edit .modal-content > div:last-child {
+    margin: 10px 0;
+    height: 40px;
+}
+
+.folders-edit .modal-content > div:last-child > div,
+.ruleset-edit .modal-content > div:last-child > div {
+    float: left;
+    width: 100px;
+}
+
+.folders-edit .modal-content > div:last-child > div:first-child,
+.ruleset-edit .modal-content > div:last-child > div:first-child {
+    margin-left: 154px;
+    margin-right: 2px;
+}
+
+.folders-edit .modal-content > div:last-child > div:last-child,
+.ruleset-edit .modal-content > div:last-child > div:last-child {
+    margin-left: 2px;
+}
+
+.edit-ruleset-dates {
+    margin: 10px 0;
+}
+
+.edit-ruleset-dates > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    
+    margin: 10px 0;
+}
+
+.edit-ruleset-dates > div > label {
+    margin: 0 auto;
+}
+
+.ruleset-edit .form-group {
+    margin: 0;
+}
+
+.ruleset-info > div:first-child > p,
+.ruleset-info > div:nth-child(2) > p {
+    float: left;
+}
+
+.ruleset-info > div:nth-child(2),
+.ruleset-info > div:nth-child(3) {
+    clear: both;
+}
+
+.ruleset-info .tag {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/***************** MAIN CONTENT *****************/ 
+/***************** TAGS *****************/ 
+.bootstrap-tagsinput {
+    padding: 0;
+    padding-bottom: 5px;
+
+    border-color: #d5d5d5;
+    border-radius: 3px;
+    box-shadow: none;
+}
+
+.bootstrap-tagsinput:focus {
+    border-color: #3066be;
+}
+
+.bootstrap-tagsinput > span:last-child {
+    padding: 5px 0;
+}
+
+.tags-desktop .tag {
+    cursor: pointer;
+}
+
+.tags-desktop .deselected {
+    color: inherit;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+}
+
+.tags-desktop .deselected:hover {
+    color: inherit;
+    background-color: #fff;
+}
+
+.tags-desktop .deselected:active,
+.tags-desktop .selected:active {
+    color: inherit;
+    background-color: #b4d397;
+    border: 1px solid #b4d397;
+}
+
+.tags-desktop .selected {
+    background-color: #76b041;
+    border: 1px solid #76b041;
+}
+
+.tag {
+    float: left;
+    margin: 5px 0 0 5px;
+    padding: 0 5px;
+
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: inherit;
+    background-color: #76b041;
+    border-radius: 3px;
+}
+
+.tag > span {
+    font-size: 12px;
+}
+
+.tag.nonexist {
+    background-color: #9b2626;
+}
+
+/***************** GENERAL *****************/ 
+/***************** BUTTONS *****************/ 
+
+.btn, .btn:active {
+    line-height: 25px;
+    box-shadow: none;
+}
+
+.btn-regular,
+.btn-confirm,
+.btn-ok,
+.btn-no,
+.login-wrapper .button {
+    width: 100px;
+    height: 40px;
+
+    text-align: center;
+    line-height: 25px;
+    
+    color: #333;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.btn-regular:hover {
+    background-color: #fafafa;
+}
+
+.btn-regular:active {
+    background-color: #fff;
+    box-shadow: none;
+}
+
+.btn-confirm:hover {
+    color: #eaeaea;
+    background-color: #6aad2b;
+    border: 1px solid #6aad2b;
+}
+
+.btn-confirm:active {
+    color: #eaeaea;
+    background-color: #75bf2f;
+    border: 1px solid #75bf2f;
+}
+
+.btn-ok:hover,
+.login-wrapper .button:hover {
+    color: #eaeaea;
+    background-color: #2c5dad;
+    border: 1px solid #2c5dad;
+}
+
+.btn-ok:active, 
+.login-wrapper .button:active {
+    color: #eaeaea;
+    background-color: #3066be;
+    border: 1px solid #3066be;
+}
+
+.btn-no {
+    color: #eaeaea;
+    background-color: #9b2626;
+    border: 1px solid #9b2626;
+}
+
+.btn-no:hover {
+    color: #eaeaea;
+    background-color: #ad2b2b;
+    border: 1px solid #ad2b2b;
+}
+
+.btn-no:active {
+    color: #eaeaea;
+    background-color: #bf2f2f;
+    border: 1px solid #bf2f2f;
+}
+
+.login-wrapper .button {
+    line-height: 1.3;
+}
+
+#btn-switch-login,
+#btn-switch-signin {
+    margin-top: 50px;
+    width: 100%;
+
+    text-decoration: underline;
+
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+}
+
+#btn-switch-login {
+    color: #a4243b;
+}
+
+#btn-switch-signin {
+    color: #3066be;
+}
+
+#btn-folders-close:link, #btn-folders-close:visited, #btn-folders-close:active,
+#btn-coll-close:link, #btn-coll-close:visited, #btn-coll-close:active,
+#btn-coll-save:link, #btn-coll-save:visited, #btn-coll-save:active,
+#btn-confirm-delete:link, #btn-confirm-delete:visited, #btn-confirm-delete:active,
+#btn-cancel-delete:link, #btn-cancel-delete:visited, #btn-cancel-delete:active {
+    display: block;
+    width: 100%;
+
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+#btn-folders-add:hover,
+#btn-folders-close:hover,
+#btn-coll-add:hover,
+#btn-coll-close:hover,
+#btn-confirm-delete:hover,
+#btn-cancel-delete:hover {
+    background-color: #fafafa;
+}
+
+#btn-cancel-delete:link, #btn-cancel-delete:visited, #btn-cancel-delete:active {
+    font-weight: bold;
+    color: #fff;
+    background-color: #dd2525;
+    border: 1px solid #dd2525;
+}
+
+#btn-cancel-delete:hover {
+    background-color: #e03838;
+    border: 1px solid #e03838;
+}
+
+#btn-selection, #btn-undo, #btn-private, #btn-card-delete {
+    margin-top: 10px;
+    padding: 5px;
+
+    width: 40px;
+    height: 40px;
+
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+#btn-selection:hover, #btn-undo:hover, #btn-private:hover {
+    color: #fff;
+
+    background-color: #ff9505;
+    border: 1px solid #ff9505;
+}
+
+#btn-selection:active, #btn-undo:active, #btn-private:active, #btn-private.locked:active {
+    color: #fff;
+
+    background-color: #ffb349;
+    border: 1px solid #ffb349;
+}
+
+#btn-card-delete:hover {
+    color: #fff;
+
+    background-color: #ad2b2b;
+    border: 1px solid #ad2b2b;
+}
+
+#btn-card-delete:active {
+    color: #fff;
+
+    background-color: #bf2f2f;
+    border: 1px solid #bf2f2f;
+}
+
+#btn-private.locked {
+    color: #fff;
+
+    background-color: #ff9505;
+    border: 1px solid #ff9505;
+}
+
+#btn-save {
+    padding: 10px;
+
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+#btn-coll-save {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+#btn-save:hover,
+#btn-coll-save:hover {
+    color: #fff;
+    background-color: #76b041;
+    border: 1px solid #76b041;
+}
+
+#btn-folder-add,
+#btn-coll-add {
+    height: 100%;
+    width: 40px;
+}
+
+#btn-know, #btn-dont {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/***************** GENERAL *****************/ 
+/***************** MISC *****************/ 
+#frm-saveCardForm,
+#frm-editCardForm,
+#frm-saveFolderForm,
+#frm-saveRulesetForm {
+    display: none;
+}
+
+.input-group.date input {
+    box-shadow: none;
+    transition: none;
+}

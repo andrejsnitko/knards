@@ -1,0 +1,88 @@
+{block title}Folder Settings{/block}
+
+{block content}
+
+<div class="folders-wrapper">
+    <div></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 col-sm-offset-1 col-sm-10 col-xs-12 div-folders knards-container">
+                <div>
+                    <div>
+                        {foreach $folders as $folder}
+                            <div class="folder {$folder->id}-folder">
+                                <div class="folder-heading">
+                                    <span>{$folder->folder_name}</span>
+                                    <a name="btn-folder-delete"><i class="fa fa-trash"></i></a>
+                                    <a name="btn-folder-edit"><i class="fa fa-pencil"></i></a>
+                                </div>
+                                <div class="folder-tags">
+                                    {ifset $tags[$folder->id]}
+                                        <div>
+                                            {foreach $tags[$folder->id] as $tag}
+                                                <div class="tag">{$tag->tag_name}</div>
+                                            {/foreach}
+                                        </div> 
+                                    {else}
+                                        <div></div>
+                                    {/ifset}
+                                </div>
+                            </div>
+                        {/foreach}
+                        <div>
+                            <a id="btn-folder-add" class="btn btn-regular"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+</div>
+
+<div class="folders-confirm-delete modal">
+    <div>
+        <div class="modal-content">
+            <p>You're about to delete this folder.</p>
+            <p>Are you sure?</p>
+            <div><a id="btn-confirm-delete" class="btn btn-regular" n:href="deleteFolder!">Yes</a></div>
+            <div><a id="btn-cancel-delete" class="btn btn-no">No</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="last-folder-delete modal">
+    <div>
+        <div class="modal-content">
+            <p>You must have at least one folder.</p>
+            <div><a id="btn-last-folder-ok" class="btn btn-ok">Ok</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="folders-edit modal">
+    <div>
+        <div class="modal-content">
+            <div class="edit-folder-name">
+                <label>Name: </label><input type="text" id="edit-folder-name">
+            </div>
+            <div class="edit-folder-tags">
+                <label>Tags: </label>
+                <div>
+                    <input id="edit-folder-tags">
+                </div>
+            </div>
+            {control saveFolderForm}
+            <div>
+                <div>
+                    <a id="btn-folder-cancel" class="btn btn-regular">Cancel</a>
+                </div>
+                <div>
+                    <a id="btn-folder-save" class="btn btn-confirm">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}

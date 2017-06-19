@@ -1,0 +1,19 @@
+parameters:
+
+
+application:
+    errorPresenter: Error
+    mapping:
+        *: App\*Module\Presenters\*Presenter
+
+
+session:
+    expiration: 14 days
+
+
+services:
+    router: App\RouterFactory::createRouter
+    users: App\Model\Users
+    folders: App\Model\Folders
+    cards: App\Model\Cards
+    collections: App\Model\Collections

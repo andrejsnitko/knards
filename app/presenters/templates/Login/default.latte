@@ -1,0 +1,28 @@
+{block title}Log in{/block}
+
+{block content}
+
+<div class="login-wrapper">
+    <div></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-5 col-md-2 col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10 div-login knards-container">
+
+                <h1>Log in</h1>
+                {control loginForm}
+                <div><button id="btn-switch-login">I have no account here.</button></div>
+
+            </div>
+            <div class="col-md-offset-5 col-md-2 col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10 div-signin knards-container div-hide">
+
+                <h1>Sign in</h1>
+                {control signinForm}
+                <div><button id="btn-switch-signin">I have got an account here.</button></div>
+
+            </div>
+        </div>
+    </div>
+    <div></div>
+</div>
+
+{/block}

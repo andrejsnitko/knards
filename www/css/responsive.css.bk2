@@ -1,0 +1,273 @@
+nav.mobile-nav,
+.hamburger,
+.mobile-actions-menu,
+.mobile-tags,
+.mobile-card-actions,
+.mobile-revise-actions,
+.mobile-options {
+    display: none;
+}
+
+/***************** PHONE *****************/ 
+@media screen and (max-width: 480px) {
+    nav .menu-left,
+    nav .menu-right,
+    .tags-inner-wrapper,
+    .actions-inner-wrapper {
+        display: none;
+    }
+
+    nav.mobile-nav,
+    .hamburger,
+    .mobile-actions-menu,
+    .mobile-tags,
+    .mobile-card-actions,
+    .mobile-revise-actions,
+    .mobile-options {
+        display: block;
+    }
+
+    /***************** TOP/BOTTOM MENUS *****************/ 
+    /***************** MENU DIVS *****************/ 
+    nav,
+    .mobile-actions-menu {
+        position: fixed;
+        z-index: 2;
+
+        width: 100%;
+        height: 50px;
+    }
+
+    nav {
+        top: 0;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+
+        background-color: #3066be;
+        box-shadow: 0px 1px 5px #757575;
+    }
+
+    .menu-top {
+        z-index: 5;
+    }
+
+    .mobile-actions-menu {
+        bottom: 0;
+
+        background-color: #3b3b3b;
+        border-top: solid 1px #757575;
+        box-shadow: 0px 1px 5px #757575;
+    }
+
+    nav > div,
+    .mobile-actions-menu > div {
+        height: 100%;
+    }
+
+    .mobile-actions-menu .mobile-tags {
+        display: inline-block;
+        width: 15%;
+
+        border-right: 1px solid #757575;
+    }
+
+    .mobile-actions-menu .mobile-card-actions {
+        float: right;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+
+        width: 85%;
+    }
+
+    .mobile-actions-menu .mobile-card-actions div {
+        margin-left: 5%;
+        width: 15%;
+    }
+
+    nav .logo {
+        width: 80%;
+    }
+
+    .hamburger {
+        width: 20%;
+    }
+
+    .hamburger > div {
+        height: 100%;
+        width: 100%;
+
+        text-align: center;
+
+        cursor: pointer;
+    }
+
+    /***************** TOP/BOTTOM MENUS *****************/ 
+    /***************** BUTTONS *****************/ 
+    nav a,
+    nav a:link,
+    nav a:active,
+    nav a:visited,
+    nav a:hover,
+    .mobile-actions-menu a,
+    .mobile-actions-menu a:link,
+    .mobile-actions-menu a:active,
+    .mobile-actions-menu a:visited,
+    .mobile-actions-menu a:hover {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        text-align: center;
+
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .mobile-actions-menu .mobile-tags a,
+    .mobile-actions-menu .mobile-tags a:link,
+    .mobile-actions-menu .mobile-tags a:active,
+    .mobile-actions-menu .mobile-tags a:visited,
+    .mobile-actions-menu .mobile-card-actions a,
+    .mobile-actions-menu .mobile-card-actions a:link,
+    .mobile-actions-menu .mobile-card-actions a:active,
+    .mobile-actions-menu .mobile-card-actions a:visited {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        text-align: center;
+        line-height: 50px;
+        color: #eaeaea;
+        font-size: 28px;
+    }
+
+    nav a:hover,
+    .mobile-actions-menu a:hover {
+        color: #fff;
+    }
+
+    nav.mobile-nav a,
+    nav.mobile-nav a:link,
+    nav.mobile-nav a:visited {
+        color: #3066be;
+    }
+
+    nav.mobile-nav a:active,
+    nav.mobile-nav a:hover {
+        color: #337ab7;
+    }
+
+    nav .logo a:link,
+    nav .logo a:active,
+    nav .logo a:visited,
+    nav .logo a:hover {
+        line-height: 54px;
+        font-family: 'Barrio', cursive;
+        font-size: 58px;
+        color: #fff;
+    }
+
+    .hamburger > div > i {
+        line-height: 50px;
+        font-size: 35px;
+        color: #fff;
+    }
+
+    nav.mobile-nav a {
+        margin-top: 10px;
+    }
+
+    nav.mobile-nav a:first-child {
+        margin-top: 0;
+    }
+
+    /***************** TOP/BOTTOM MENUS *****************/ 
+    /***************** TRIGGER MENUS *****************/ 
+    nav.mobile-nav,
+    .div-mobile-tags {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        z-index: 3;
+
+        width: 100%;
+        min-height: 100%;
+
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0);
+
+        transition: .5s;
+    }
+
+    nav.mobile-nav.menu-expand,
+    .div-mobile-tags {
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    nav.mobile-nav ul {
+        position: absolute;
+        top: 0;
+        left: 480px;
+        z-index: 4;
+        padding: 0;
+        width: 90%;
+        height: 100%;
+
+        background-color: #fff;
+        list-style: none;
+        transition: .25s ease-in-out;
+    }
+
+    nav.mobile-nav.menu-expand ul {
+        left: 10%;
+    }
+
+    nav.mobile-nav li {
+        padding: 10px;
+        width: 100%;
+    }
+
+    nav.mobile-nav .panel-group {
+        margin: 0;
+        width: 100%;
+    }
+
+    nav.mobile-nav .panel-group * {
+        padding: 0;
+
+        line-height: 1.4;
+        background-color: inherit;
+        border: none;
+        box-shadow: none;
+    }
+
+    nav.mobile-nav .panel-body {
+        padding: 10px;
+        margin-top: 10px;
+
+        border: 1px solid #d5d5d5;
+    }
+
+    .div-mobile-tags {
+        bottom: 50px;
+        left: 0;
+    }
+
+    .div-mobile-tags > div {
+    }
+
+    /***************** TOP/BOTTOM MENUS *****************/ 
+    /***************** MISC *****************/ 
+    nav.mobile-nav .caret {
+        display: none;
+        margin: 0;
+        vertical-align: none;
+    }

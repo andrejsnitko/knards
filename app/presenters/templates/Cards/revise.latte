@@ -1,0 +1,67 @@
+{block title}{ifset $collectionName}{$collectionName->name}{else}Revise{/ifset}{/block}
+
+{block content}
+
+
+<div class="revise-card-wrapper">
+    <div></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 card-wrapper">
+                <div class="knards-container">
+                    <div class="card-info"><div></div><div></div></div>
+                    <div class="card" contenteditable="true" tabindex="0"></div>
+
+
+
+
+
+                </div>
+            </div>
+            <div class="hidden-sm hidden-xs actions-desktop">
+                <div class="knards-container">
+                    <div>
+                        <div class="score"></div>
+                    </div>
+                    <div>
+                        <div>
+                            <div><a n:href="continue!" id="btn-know" class="btn btn-confirm">I know this</a></div>
+                            <div><a n:href="continue!" id="btn-dont" class="btn btn-regular">Show the answers</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+</div>
+
+{********** MODALS **********}
+
+<div class="no-cards modal">
+    <div>
+        <div class="modal-content">
+            <p>There're no cards in this collection.</p>
+            <p>You've either already revised all cards today or the creator(s) of those cards have them deleted.</p>
+            <div><a id="btn-no-cards-ok" n:href="Homepage:" class="btn btn-ok">Ok</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="coll-complete modal">
+    <div>
+        <div class="modal-content">
+            <p>Congratulations! You have completed this collection.</p>
+            <div><a id="btn-complete-ok" n:href="Homepage:" class="btn btn-ok">Ok</a></div>
+        </div>
+    </div>
+</div>
+
+{********** MOBILE MENU **********}
+
+<div class="mobile-actions-menu">
+    <div class="mobile-revise-actions">
+    </div>
+</div>
+
+{/block}

@@ -1,0 +1,107 @@
+{block title}Edit Cards{/block}
+
+{block active}active-edit{/block}
+
+{block content}
+
+<div class="list-cards-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="hidden-sm hidden-xs tags-desktop">
+                <div class="knards-container">
+                Tags:
+                    <div>
+                        <div class="panel-group" id="td-accordion" role="tablist" aria-multiselectable="true">
+                            {foreach $folders as $folder}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="td-heading-{$folder->id}">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="td-accordion" href="#td-collapse-{$folder->id}" aria-expanded="true" aria-controls="td-collapse-{$folder->id}">
+                                            {$folder->folder_name}
+                                        </a>
+                                    </h4>
+                                    </div>
+                                    <div id="td-collapse-{$folder->id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="td-heading-{$folder->id}">
+                                    <div class="panel-body">
+                                        {ifset $tags[$folder->id]}
+                                            {foreach $tags[$folder->id] as $tag}
+                                                <div name="{$tag->id}" class="tag deselected">
+                                                    {$tag->tag_name}
+                                                </div>
+                                            {/foreach}
+                                        {/ifset}
+                                    </div>
+                                    </div>
+                                </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 card-wrapper">
+                {ifset $cards}
+                    {foreach $cards as $card}
+                        <a class="card-link" n:href="Cards:edit $card->id">
+                            <div id="{$card->id}-card" class="card"{ifset $card_tags[$card->id]['tags']} tags="{$card_tags[$card->id]['tags']}"{/ifset}>
+                                <div class="date {$card->created_at|date:'d/m/Y'}">
+                                    Created on {$card->created_at|date:'F j, Y'}
+                                </div>
+                                <div>
+                                    {$card->content}
+                                </div>
+                            </div>
+                        </a>
+                    {/foreach}
+                {/ifset}
+            </div>
+            <div class="hidden-sm hidden-xs actions-desktop">
+                <div class="knards-container">
+                    <div>
+                        Cards total: 0
+                    </div>
+                    <div class="dropdown">
+                      <button class="btn btn-regular dropdown-toggle" type="button" id="dropdownSort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Sort by
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownSort">
+                        <li><a id="btn-sort-newest-first" href="#">date (newest first)</a></li>
+                        <li><a id="btn-sort-oldest-first" href="#">date (oldest first)</a></li>
+                      </ul>
+                    </div>
+                    <div class="form-group">
+                        <label>Date from:</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control">
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date to:</label>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control">
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{********** MOBILE MENU **********}
+
+<div class="actions-mobile">
+    <div class="am-btn-tags">
+        <a><i class="fa fa-tags"></i></a>
+    </div>
+    <div class="am-btn-options">
+        <a><i class="fa fa-gear"></i></a>
+    </div>
+</div>
+
+{/block}

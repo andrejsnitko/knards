@@ -1,0 +1,127 @@
+{block title}Collections{/block}
+
+{block content}
+
+<div class="collections-wrapper">
+    <div></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 col-sm-offset-1 col-sm-10 col-xs-12 div-collections knards-container">
+                <div>
+                    <div>
+                        {if count($collections) != 0}
+                        {foreach $collections as $collection}
+                            <div class="ruleset {$collection['id']}-ruleset">
+                                <div class="ruleset-heading">
+                                    <span>{$collection['name']}</span>
+                                    <a name="btn-coll-delete"><i class="fa fa-trash"></i></a>
+                                    <a name="btn-coll-edit"><i class="fa fa-pencil"></i></a>
+                                </div>
+                                <div class="ruleset-info">
+                                    <div><p>Tags:&nbsp;</p>
+                                             {if sizeof($collection['tags']) > 0}
+                                                {foreach $collection['tags'] as $tag}
+                                                    <div class="tag">{$tag->tag_name}</div>
+                                                {/foreach}
+                                             {else}
+                                                all
+                                             {/if}</div>
+                                    <div><p>Users:&nbsp;</p>
+                                             {if sizeof($collection['users']) > 0}
+                                                {foreach $collection['users'] as $cuser}
+                                                    <div class="tag">{$cuser->username}</div>
+                                                {/foreach}
+                                             {else}
+                                                all
+                                             {/if}</div>
+                                    <div>Dates: {if $collection['date_from'] == null}
+                                                all
+                                              {else} 
+                                                from {$collection['date_from']|date:'d.m.Y'}
+                                              {/if} - 
+                                              {if $collection['date_to'] == null}
+                                                all
+                                              {else} 
+                                                to {$collection['date_to']|date:'d.m.Y'}
+                                              {/if}</div>
+                                </div>
+                            </div>
+                        {/foreach}
+                        {/if}
+                        <div>
+                            <a id="btn-coll-add" class="btn btn-regular"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+</div>
+
+
+<div class="coll-confirm-delete modal">
+    <div>
+        <div class="modal-content">
+            <p>You're about to delete this ruleset.</p>
+            <p>Are you sure?</p>
+            <div><a id="btn-confirm-delete" class="btn btn-regular" n:href="deleteCollection!">Yes</a></div>
+            <div><a id="btn-cancel-delete" class="btn btn-no" href="#">No</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="ruleset-edit modal">
+    <div>
+        <div class="modal-content">
+            <div class="edit-ruleset-name">
+                <label>Name: </label><input type="text" id="edit-ruleset-name">
+            </div>
+            <div class="edit-ruleset-tags">
+                <div>
+                    <label>Tags: </label><input type="text" id="edit-ruleset-tags">
+                </div>
+            </div>
+            <div class="edit-ruleset-users">
+                <div>
+                    <label>Users: </label><input type="text" id="edit-ruleset-users">
+                </div>
+            </div>
+            <div class="edit-ruleset-dates">
+                <div>
+                    <label>Date from: </label>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control">
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label>Date to: </label>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control">
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {control saveRulesetForm}
+            <div>
+                <div>
+                    <a id="btn-coll-cancel" href="#" class="btn btn-regular">Cancel</a>
+                </div>
+                <div>
+                    <a id="btn-coll-save" href="#" class="btn btn-confirm">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}

@@ -1,0 +1,76 @@
+{block title}Edit Card{/block}
+
+{block active}active-edit{/block}
+
+{block content}
+
+<div class="edit-card-wrapper">
+    <div></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="hidden-sm hidden-xs tags-desktop">
+                <div class="knards-container">
+                Tags:
+                    <div>
+                        <div class="panel-group" id="td-accordion" role="tablist" aria-multiselectable="true">
+                            {foreach $folders as $folder}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="td-heading-{$folder->id}">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="td-accordion" href="#td-collapse-{$folder->id}" aria-expanded="true" aria-controls="td-collapse-{$folder->id}">
+                                            {$folder->folder_name}
+                                        </a>
+                                    </h4>
+                                    </div>
+                                    <div id="td-collapse-{$folder->id}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="td-heading-{$folder->id}">
+                                    <div class="panel-body">
+                                        {ifset $tags[$folder->id]}
+                                            {foreach $tags[$folder->id] as $tag}
+                                                <div name="{$tag->id}" class="tag {ifset $card_tags}{if in_array($tag->tag_name, $card_tags) }selected{else}deselected{/if}{else}deselected{/ifset}">
+                                                    {$tag->tag_name}
+                                                </div>
+                                            {/foreach}
+                                        {/ifset}
+                                    </div>
+                                    </div>
+                                </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 card-wrapper">
+                <div class="knards-container">
+                    <div id="{$card->id}" class="card" contenteditable="true" tabindex="0" data-toggle="tooltip" data-placement="top" title="Click anywhere on the card and start typing in">
+                        {$card->content} 
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-sm hidden-xs actions-desktop">
+                <div class="knards-container">
+                    <button id="btn-selection" role="button"><i class="fa fa-paint-brush"></i></button>
+                    <button id="btn-undo" role="button"><i class="fa fa-undo"></i></button>
+                    <button id="btn-private" role="button"><i class="fa fa-unlock"></i></button>
+                    <button id="btn-card-delete" role="button"><i class="fa fa-trash"></i></button>
+                    {control editCardForm}
+                    <div>
+                        <button id="btn-save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+</div>
+
+{********** MOBILE MENU **********}
+
+<div class="actions-mobile">
+    <div class="mobile-tags">
+        <a><i class="fa fa-tags"></i></a>
+    </div>
+    <div class="mobile-card-actions">
+    </div>
+</div>
+
+{/block}

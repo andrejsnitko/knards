@@ -1,0 +1,338 @@
+'use strict';
+
+/****************** PLUGINS ACTIVATION ******************/ 
+
+$(function() {
+    $('.tagBox').tagging();
+});
+
+$(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+
+    if($('.list-cards-inner-wrapper').length > 0) {
+        $('.card').each(function() {
+            var data = $(this).children('div:first').prop('outerHTML');
+            var content = $(this).children('div:last').text().decryptSpecialChars();
+            $(this).html(data + content);
+        });
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });      
+
+        $('#datetimepicker2').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+    }
+    if($('.card-inner-wrapper').length > 0)
+        $('.card').html($('.card').text().decryptSpecialChars());
+
+});
+
+$('#datetimepicker1').on('dp.change', function() {
+    $('.card .date').each(function() {
+        if($(this).attr('class').substring(5) < $('#datetimepicker1 input').val())
+            $(this).parent().parent().css('display', 'none');
+        else 
+            $(this).parent().parent().css('display', 'block');
+    });
+});
+
+$('#datetimepicker2').on('dp.change', function() {
+    $('.card .date').each(function() {
+        if($(this).attr('class').substring(5) > $('#datetimepicker2 input').val())
+            $(this).parent().parent().css('display', 'none');
+        else 
+            $(this).parent().parent().css('display', 'block');
+    });
+});
+
+/****************** DEFAULT BUTTON AND LINK ACTION OVERRIDES ******************/ 
+
+$('#btn-switch-login').on('click', function() {
+    $('.div-login').children('div:first').css('display', 'none');
+    $('.div-login').children('div:last').css('display', 'block');
+});
+
+$('#btn-switch-signin').on('click', function() {
+    $('.div-login').children('div:last').css('display', 'none');
+    $('.div-login').children('div:first').css('display', 'block');
+});
+
+$('[name="btn-delete"]').on('click', function(event) {
+    event.preventDefault();
+    if($('[name="btn-delete"]').length == 1) {
+        alert('You must have at least one folder.');
+        return false;
+    }
+    $('.confirmation').css('display', 'block');
+    $('#btn-confirm-delete').attr('class', $(this).parent().parent().attr('class').substring(7, $(this).parent().parent().attr('class').indexOf('-')));
+});
+
+$('#btn-cancel-delete').on('click', function() {
+    $('.modal').css('display', 'none');
+});
+
+$('#btn-coll-cancel').on('click', function() {
+    $('.modal').css('display', 'none');
+});
+
+$('span').on('keydown', function(event) {
+    if(event.keyCode == 13) {
+        event.preventDefault();
+        $(this).blur();
+    }
+});
+
+$('.tag[name]').on('click', function() {
+    if($(this).attr('class') == 'tag deselected') $(this).attr('class', 'tag selected');
+    else $(this).attr('class', 'tag deselected');
+
+    var tag_name = $(this).text().trim();
+
+    if($('.list-cards-inner-wrapper').length > 0) {
+        if($('.selected').length == 0) {
+            $('.card').each(function() {
+                $(this).css('display', 'block');
+            });
+        } else {
+            $('.card').each(function() {
+                if($(this).attr('tags').indexOf(tag_name) == -1) $(this).css('display', 'none');
+            });
+        }
+    }
+});
+
+$('#btn-selection').on('click', function() {
+    var selection = window.getSelection();
+    var range = selection.getRangeAt(0);
+
+    var el = document.createElement('span');
+    el.setAttribute('class', 'question');
+    var id = 0;
+    if($('.card .question').length > 0)
+        $('.card .question').each(function(index) {
+            if($('[name="q' + index + '"]').length == 0) $(this).attr('name', 'q' + index);
+            id++;
+        });
+    el.setAttribute('name', 'q' + id);
+
+    range.surroundContents(el);
+    selection.removeAllRanges();
+
+    if($('[name="q' + id + '"]').has('span') != 0) {
+        $('[name="q' + id + '"]').html($('[name="q' + id + '"]').text());
+    }
+});
+
+$('#btn-undo').on('click', function() {
+    var span = $('.card').children('[name="q' + $('.card').children('span').length + '"]');
+    var unwrap = $('.card').children('[name="q' + $('.card').children('span').length + '"]').text();
+
+    span.before(unwrap);
+    span.remove();
+});
+
+$('.card').on('paste', function(event) {
+    event.preventDefault();
+    var pasteData = event.originalEvent.clipboardData.getData('text/html');
+    var data = pasteData.encryptSpecialChars();
+    var data = data.decryptSpecialChars();
+    $('.card').append(data);
+});
+
+$('.card').on('click', function() {
+    if($('.card-inner-wrapper').length > 0)
+        $('.tooltip.top').css('display', 'none');
+});
+
+$('#btn-save').on('click', function() {
+    if($('.new-card').length > 0) {
+        if($('.selected').length > 0) {
+            var tags = '';
+            $('.selected').each(function() {
+                tags += $(this).attr('name') + ',';
+            });
+            $('#frm-saveCardForm-tags').val(tags.substring(0, tags.length - 1).trim());
+        } else {
+            alert('A card must have at least one tag assigned to it.');
+            return false;
+        }
+    
+        if($('.card').html().length > 0) {
+            $('#frm-saveCardForm-text').val($('.card').html().trim().encryptSpecialChars());
+        } else {
+            alert('Cannot save an empty card.');
+            return false;
+        }
+    
+        if($('.checkbox label input').is(':checked')) 
+            $('#frm-saveCardForm-private').val('true');
+        else $('#frm-saveCardForm-private').val('false');
+    
+        $('#frm-saveCardForm').submit();
+    }
+    if($('.edit-card').length > 0) {
+        $('#frm-editCardForm-id').val($('.card').attr('id'));
+
+        if($('.selected').length > 0) {
+            var tags = '';
+            $('.selected').each(function() {
+                tags += $(this).attr('name') + ',';
+            });
+            $('#frm-editCardForm-tags').val(tags.substring(0, tags.length - 1).trim());
+        } else {
+            alert('A card must have at least one tag assigned to it.');
+            return false;
+        }
+    
+        if($('.card').html().length > 0) {
+            $('#frm-editCardForm-text').val($('.card').html().trim().encryptSpecialChars());
+        } else {
+            alert('Cannot save an empty card.');
+            return false;
+        }
+    
+        if($('.checkbox label input').is(':checked')) 
+            $('#frm-editCardForm-private').val('true');
+        else $('#frm-editCardForm-private').val('false');
+    
+        $('#frm-editCardForm').submit();
+    }
+});
+
+$('#btn-coll-add').on('click', function(event) {
+    event.preventDefault();
+    $('.div-edit-ruleset').css('display', 'block');
+});
+
+/****************** AJAX ******************/ 
+
+$(function() {
+    $.nette.init();
+
+    $('#btn-folders-add').on('click', function(event) {
+        event.preventDefault();
+        $(this).parent().prev().clone(true).insertBefore($(this).parent());
+        $(this).parent().prev().attr('class', 'folder new-folder');
+        $(this).parent().prev().children('.folder-tags').children('div').html('<input class="type-zone" contenteditable="true">');
+        $(this).parent().prev().children('div:first').children('a:first').css('display', 'none');
+        $(this).parent().prev().children('div:first').children('a:last').css('display', 'none');
+        $(this).parent().prev().children('div:first').children('span').attr('contenteditable', 'true');
+        $(this).css('display', 'none');
+        $(this).parent().prev().children('div:first').children('span').focus();
+    });
+
+    $('[name="btn-rename"]').on('click', function(event) {
+        event.preventDefault();
+        $(this).css('display', 'none');
+        $(this).prev().css('display', 'none');
+        $(this).parent().children('span').attr('contenteditable', 'true');
+        $(this).parent().children('span').focus();
+    });
+
+    $('span').focusout(function() {
+        if($(this).parent().parent().attr('class').indexOf('new-folder') != -1) {
+            var name = $(this).text();
+            $.nette.ajax({
+                type: 'POST',
+                url: $('#btn-folders-add').attr('href'),
+                data: {'new': name},
+                success: function(payload) {
+                    $('.new-folder').children('div:first').children('a:first').css('display', 'inline-block');
+                    $('.new-folder').children('div:first').children('a:last').css('display', 'inline-block');
+                    $('.new-folder').children('div:first').children('span').attr('contenteditable', 'false');
+                    $('.new-folder').children('.folder-tags').html('<div data-tags-input-name="tag" class="tagBox"></div>');
+                    $('.new-folder').children('.folder-tags').children('.tagBox').tagging();
+                    $('.new-folder').attr('class', 'folder ' + payload.id + '-folder');
+                    $('#btn-folders-add').css('display', 'block');
+                }
+            });
+        }
+        if($(this).parent().parent().attr('class').indexOf('new-folder') == -1) {
+            var name = $(this).text();
+            var id = $(this).parent().parent().attr('class').substring(7, $(this).parent().parent().attr('class').indexOf('-'));
+
+                $.nette.ajax({
+                type: 'POST',
+                url: $('[name="btn-rename"]').attr('href'),
+                data: {'rename': name, 'folder_id': id},
+                success: function(payload) {
+                    $('div .' + payload.id + '-folder').children('div:first').children('a:first').css('display', 'inline-block');
+                    $('div .' + payload.id + '-folder').children('div:first').children('a:last').css('display', 'inline-block');
+                    $('div .' + payload.id + '-folder').children('div:first').children('span').attr('contenteditable', 'false');
+                }
+            });
+        }
+    });
+
+    $('#btn-confirm-delete').on('click', function(event) {
+        event.preventDefault();
+
+        $.nette.ajax({
+            type: 'POST',
+            url: $(this).attr('href'),
+            data: {'delete': $(this).attr('class')},
+            success: function() {
+                $('.modal').css('display', 'none');
+            }
+        });
+    });
+
+    $('#btn-folders-close').on('click', function(event) {
+        event.preventDefault();
+        var data = {};
+        $('.folder').each(function() {
+                var folder = $(this).attr('class').substring(7, $(this).attr('class').indexOf('-'));
+                data[folder] = {};
+
+                $(this).children('.folder-tags').children('.tagBox').children('div').each(function(i) {
+                    data[folder][i] = $(this).text().substring(2, $(this).text().length - 1).trim();
+                });
+        });
+
+        $.nette.ajax({
+            type: 'POST',
+            url: $(this).attr('href'),
+            data: data,
+            success: function() {
+            }
+        });
+    });
+});
+
+/****************** CUSTOM FNS ******************/ 
+
+String.prototype.encryptSpecialChars = function() {
+    var result;
+    result = this.split('&lt;').join('~lt~');
+    result = result.split('&gt;').join('~gt~');
+    result = result.split('&amp;').join('~amp~');
+    result = result.split('&quot;').join('~\'~');
+    result = result.split('<').join('~lt~');
+    result = result.split('>').join('~gt~');
+    result = result.split('\'').join('~sq~');
+    result = result.split('\"').join('~dq~');
+    result = result.split('\\').join('~bs~');
+    result = result.split('|').join('~or~');
+    result = result.split('&').join('~amp~');
+    result = result.split(';').join('~sc~');
+    return result;
+}
+
+String.prototype.decryptSpecialChars = function() {
+    var result;
+    result = this.split('~lt~span').join('<span');
+    result = result.split('~lt~/span~gt~').join('</span>');
+    result = result.split('~lt~br~gt~').join('<br>');
+    result = result.split('~lt~').join('&lt;');
+    result = result.split('~gt~').join('>');
+    result = result.split('~amp~').join('&');
+    result = result.split('~sq~').join('\'');
+    result = result.split('~dq~').join('\"');
+    result = result.split('~bs~').join('\\');
+    result = result.split('~fs~').join('/');
+    result = result.split('~or~').join('|');
+    result = result.split('~sc~').join(';');
+    return result;
+}
