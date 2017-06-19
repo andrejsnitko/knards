@@ -10,17 +10,17 @@ $(function() {
     });
 
     //---------- LOGIN ----------//
-    if($('.login-wrapper').length > 0) {
+    if($('.login').length > 0) {
         
         
         $('#btn-switch-login').on('click', function() {
-            $('.div-login').toggleClass('div-hide');
-            $('.div-signin').toggleClass('div-hide');
+            $('.login .modal-content').children('div:first').toggleClass('div-hide');
+            $('.login .modal-content').children('div:last').toggleClass('div-hide');
         });
         
         $('#btn-switch-signin').on('click', function() {
-            $('.div-signin').toggleClass('div-hide');
-            $('.div-login').toggleClass('div-hide');
+            $('.login .modal-content').children('div:last').toggleClass('div-hide');
+            $('.login .modal-content').children('div:first').toggleClass('div-hide');
         });
 
     }
