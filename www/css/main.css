@@ -207,6 +207,38 @@ nav.active-edit #btn-edit {
     background-color: #2c5dad;
 }
 
+nav.active-welcome ul {
+    display: none;
+}
+
+/***************** WELCOME *****************/ 
+.div-welcome * {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.div-welcome div {
+    width: 200px;
+    height: 40px;
+}
+
+.div-welcome a {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    line-height: 40px;
+    color: #eaeaea;
+    background-color: #2c5dad;
+    border-radius: 50px;
+}
+
+.div-welcome a:hover {
+    color: #fff;
+    background-color: #3066be;
+}
+
 /***************** LOGIN *****************/ 
 .login h1 {
     margin: 0;
@@ -228,72 +260,6 @@ nav.active-edit #btn-edit {
     width: 100px;
 }
 
-/*.login-wrapper {
-    position: fixed;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-
-    height: 100%;
-    width: 100%;
-
-    z-index: 99; 
-
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-.login-wrapper > div {
-    flex-grow: 1;
-}
-
-.div-login, .div-signin {
-    padding: 30px;
-}
-
-.login-wrapper > .container-fluid {
-    margin: 0;
-}
-
-.div-login > form > table,
-.div-signin > form > table {
-    width: 100%;
-}
-
-.div-login > form > table label,
-.div-signin > form > table label {
-    margin: 0 5px 0 0;
-}
-
-.div-login > form > table td,
-.div-signin > form > table td {
-    display: inline-block;
-    padding: 5px 0;
-    width: 100%;
-}
-
-.div-login > form > table td > input,
-.div-signin > form > table td > input {
-    width: 100%;
-}
-
-.div-login h1,
-.div-signin h1 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.div-login > div,
-.div-signin > div {
-    margin-top: 50px;
-}
-
-.div-login > div > button,
-.div-signin > div > button {
-    width: 100%;
-}
-*/
 /***************** MAIN CONTENT *****************/ 
 .knards-container {
     padding: 50px;
@@ -332,6 +298,7 @@ nav.active-edit #btn-edit {
     margin-bottom: 60px;
 }
 
+.welcome-wrapper,
 .homepage-wrapper,
 .new-card-wrapper,
 .edit-card-wrapper,
@@ -345,6 +312,18 @@ nav.active-edit #btn-edit {
 .folders-wrapper .row,
 .collections-wrapper .row {
     height: 100%;
+}
+
+.welcome-wrapper {
+    background-color: #fff;
+}
+
+.welcome-wrapper > div {
+    height: 10%;
+}
+
+.welcome-wrapper .container-fluid > .row:first-child {
+    min-height: 200px;
 }
 
 .homepage-wrapper > div,
@@ -363,12 +342,9 @@ nav.active-edit #btn-edit {
     max-height: 60%;
 }
 
-.homepage-wrapper > .container-fluid,
 .new-card-wrapper > .container-fluid,
 .edit-card-wrapper > .container-fluid,
 .revise-card-wrapper > .container-fluid,
-.folders-wrapper > .container-fluid,
-.collections-wrapper > .container-fluid,
 .tags-desktop {
     height: 500px;
 }
@@ -955,4 +931,9 @@ nav.active-edit #btn-edit {
 .input-group.date input {
     box-shadow: none;
     transition: none;
+}
+
+img.mockup {
+    margin: 0 auto;
+    width: 80%;
 }
