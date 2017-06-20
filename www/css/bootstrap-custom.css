@@ -11,11 +11,18 @@
     position: absolute;
     top: 0;
     left: 50%;
+    height: 100%;
+}
+
+.navbar-header > div {
+    position: relative;
+    left: -50%;
+    height: 100%;
 }
 
 .navbar-header .logo {
-    position: relative;
-    left: -50%;
+    display: block;
+    height: 100%;
 
     color: #fff;
     font-size: 58px;

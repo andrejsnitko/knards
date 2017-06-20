@@ -3,5 +3,20 @@
     display: none;
 }
 
-@media screen and (max-width: 1500px) {
+@media(max-width:767px) {
+    .welcome-wrapper {
+        overflow: auto;
+    }
+}
+
+@media(max-width:1440px){
+    .welcome-wrapper {
+        overflow: auto;
+    }
+
+    .div-welcome > div {
+        margin: 0 auto;
+        padding: 10px 0;
+        clear: both;
+    }
 }
