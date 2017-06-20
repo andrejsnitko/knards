@@ -243,6 +243,10 @@ nav.active-welcome ul {
     margin: 30px 5px;
 }
 
+.div-welcome p > span {
+    display: inline-block;
+}
+
 .div-welcome p:nth-child(4) {
     margin-bottom: 20px;
 }
