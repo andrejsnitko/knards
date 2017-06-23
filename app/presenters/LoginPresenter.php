@@ -62,18 +62,20 @@ class LoginPresenter extends Nette\Application\UI\Presenter {
     public function loginFormSucceeded($form) {
         $values = $form->getValues();
         $data = [$values->username, $values->password];
-
         $user = $this->getUser();
 
-        $user_id = $this->users->authenticate($data);
-        if($user_id) {
-            $user->login($data[0], $data[1]);
-            $this->redirect('Homepage:');
-        }
-        else $this->redirect('Login:');
-        /** TO-DO
-         * Error processing
-         */
-    }
+        try {
+            $user_id = $this->users->authenticate($data);
+            
+            if($user_id) {
+                $user->login($data[0], $data[1]);
+                $this->redirect('Homepage:');
+            } else { 
+                $form->addError('auth-error');
+            }
 
+        } catch (Nette\Security\AuthenticationException $e) {
+            $form->addError('auth-error');
+        }
+    }
 }

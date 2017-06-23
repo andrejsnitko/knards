@@ -13,6 +13,12 @@ $(function() {
     if($('.login').length > 0) {
         
         
+        if($('ul.error').length > 0) {
+            if($('ul.error li').text() == 'auth-error') {
+                $('.auth-error').css('display', 'block');
+            }
+        }
+
         $('#btn-switch-login').on('click', function() {
             $('.login .modal-content').children('div:first').toggleClass('div-hide');
             $('.login .modal-content').children('div:last').toggleClass('div-hide');
