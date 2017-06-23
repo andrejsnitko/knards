@@ -36,13 +36,16 @@ class LoginPresenter extends Nette\Application\UI\Presenter {
     public function signinFormSucceeded($form) {
         $values = $form->getValues();
 
-        $new_user_id = $this->users->register($values);
+        try {
+            $new_user_id = $this->users->register($values);
+        } catch(Nette\Database\UniqueConstraintViolationException $e) {
+            $new_user_id = null;
+            $form->addError($e->getMessage());
+        }
+
         if($new_user_id) {
             $this->redirect('Homepage:');
         }
-        /** TO-DO
-         * Check for validity
-         */
     }
 
     protected function createComponentLoginForm() {

@@ -91,7 +91,9 @@ a:link, a:active, a:focus, a:visited, a:hover {
     display: block;
 }
 
-.auth-error.modal {
+.auth-error.modal,
+.uniq-username-error.modal,
+.uniq-email-error.modal {
     display: none;
     z-index: 100;
 }
@@ -117,6 +119,12 @@ a:link, a:active, a:focus, a:visited, a:hover {
 .auth-error > div {
     width: 250px;
     height: 140px;
+}
+
+.uniq-username-error > div,
+.uniq-email-error > div {
+    width: 250px;
+    height: 155px;
 }
 
 .folders-confirm-delete > div {
@@ -158,6 +166,8 @@ a:link, a:active, a:focus, a:visited, a:hover {
 
 .login .modal-content,
 .auth-error .modal-content,
+.uniq-username-error .modal-content,
+.uniq-email-error .modal-content,
 .last-folder-delete .modal-content,
 .no-cards .modal-content,
 .coll-complete .modal-content,
@@ -184,6 +194,8 @@ a:link, a:active, a:focus, a:visited, a:hover {
 
 .login .modal-content > div,
 .auth-error .modal-content > div,
+.uniq-username-error .modal-content > div,
+.uniq-email-error .modal-content > div,
 .last-folder-delete .modal-content > div,
 .coll-complete .modal-content > div,
 .no-cards .modal-content > div {
@@ -193,6 +205,8 @@ a:link, a:active, a:focus, a:visited, a:hover {
 
 .last-folder-delete .modal-content > div > a,
 .auth-error .modal-content > div > a,
+.uniq-username-error .modal-content > div > a,
+.uniq-email-error .modal-content > div > a,
 .coll-complete .modal-content > div > a,
 .folders-confirm-delete .modal-content > div > a,
 .coll-confirm-delete .modal-content > div > a {
@@ -202,6 +216,8 @@ a:link, a:active, a:focus, a:visited, a:hover {
 
 .last-folder-delete p,
 .auth-error p,
+.uniq-username-error p,
+.uniq-email-error p,
 .no-cards p,
 .coll-complete p,
 .folders-confirm-delete p,
