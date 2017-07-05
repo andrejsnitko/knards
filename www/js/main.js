@@ -440,6 +440,7 @@ $(function() {
             }
 
             $('.question').on('mousedown', spanToInput);
+            $('.question:first').trigger('mousedown');
 
             $('#btn-know').on('click', function(event) {
                 event.preventDefault();
@@ -470,6 +471,7 @@ $(function() {
                     $('.score').text('You\'re score on this cards is: ' + cards[id]['score']);
 
                     $('.question').on('mousedown', spanToInput);
+                    $('.question:first').trigger('mousedown');
                 } else {
                     // flag = 1 -> collection completed
                     // flag = 0 -> user has left the revising section (save all revised cards)
@@ -517,6 +519,8 @@ $(function() {
                         $('.score').text('You\'re score on this cards is: ' + cards[id]['score']);
 
                         $(this).text("Show the answers");
+                        $('.question').on('mousedown', spanToInput);
+                        $('.question:first').trigger('mousedown');
                     } else {
                         // flag = 1 -> collection completed
                         // flag = 0 -> user has left the revising section (save all revised cards)
