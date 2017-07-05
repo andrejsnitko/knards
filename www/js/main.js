@@ -373,16 +373,16 @@ $(function() {
             var id = 0;
             var tags = '';
             cards[id]['tags'].forEach(function(element) {
-                tags += element + ', ';
+                tags += '<b>' + element + '</b>, ';
             });
             tags = tags.substring(0, tags.length - 2);
 
             // .card-info div:first -> left part of card heading = place for tags str
             // .card-info div:last -> right part = for date and creator id
             if(tags.length <= 70)
-                $('.card-info div:first').text('Tags: ' + tags);
+                $('.card-info div:first').html('Tags: ' + tags.encryptSpecialChars().decryptSpecialChars());
             else
-                $('.card-info div:first').text('Tags: ' + tags.substring(0, 70) + '...');
+                $('.card-info div:first').html('Tags: ' + tags.substring(0, 70).encryptSpecialChars().decryptSpecialChars() + '...');
             $('.card-info div:last').text('Created on ' + cards[id]['created_at'] + ' by ' + cards[id]['created_by']);
 
             $('.card').html(cards[id]['content'].decryptSpecialChars());
@@ -390,7 +390,7 @@ $(function() {
 
 
             var spanToInput = function() {
-                if($(this).css('display') != 'none') {
+                if($(this).css('display') != 'none' && $(this).attr('class') != 'answer') {
                     var elemWidth = $(this).width();
                     var input = '<input name="' + $(this).attr('name') + '" class="q-input" style="width: ' + (elemWidth + 6) + 'px;">';
                     var name = $(this).attr('name');
@@ -456,14 +456,14 @@ $(function() {
                 if(id != cards.length) {
                     tags = '';
                     cards[id]['tags'].forEach(function(element) {
-                        tags += element + ', ';
+                        tags += '<b>' + element + '</b>, ';
                     });
                     tags = tags.substring(0, tags.length - 2);
 
                     if(tags.length <= 70)
-                        $('.card-info div:first').text('Tags: ' + tags);
+                        $('.card-info div:first').html('Tags: ' + tags.encryptSpecialChars().decryptSpecialChars());
                     else
-                        $('.card-info div:first').text('Tags: ' + tags.substring(0, 70) + '...');
+                        $('.card-info div:first').html('Tags: ' + tags.substring(0, 70).encryptSpecialChars().decryptSpecialChars() + '...');
                     $('.card-info div:last').text('Created on ' + cards[id]['created_at'] + ' by ' + cards[id]['created_by']);
 
                     $('.card').html(cards[id]['content'].decryptSpecialChars());
@@ -483,6 +483,10 @@ $(function() {
                 if($(this).text().indexOf('Show') != -1) {
                     $('.card').children('span').each(function() {
                         $(this).attr('class', 'answer');
+                        $(this).css('display', 'inline-block');
+                    });
+                    $('.card').children('input').each(function() {
+                        $(this).remove();
                     });
                     $(this).text("I don't know this");
                 }
@@ -499,14 +503,14 @@ $(function() {
                     if(id != cards.length) {
                         tags = '';
                         cards[id]['tags'].forEach(function(element) {
-                            tags += element + ', ';
+                            tags += '<b>' + element + '</b>, ';
                         });
                         tags = tags.substring(0, tags.length - 2);
 
                         if(tags.length <= 70)
-                            $('.card-info div:first').text('Tags: ' + tags);
+                            $('.card-info div:first').html('Tags: ' + tags.encryptSpecialChars().decryptSpecialChars());
                         else
-                            $('.card-info div:first').text('Tags: ' + tags.substring(0, 70) + '...');
+                            $('.card-info div:first').html('Tags: ' + tags.substring(0, 70).encryptSpecialChars().decryptSpecialChars() + '...');
                         $('.card-info div:last').text('Created on ' + cards[id]['created_at'] + ' by ' + cards[id]['created_by']);
     
                         $('.card').html(cards[id]['content'].decryptSpecialChars());
@@ -864,6 +868,8 @@ String.prototype.decryptSpecialChars = function() {
     result = this.split('~lt~span').join('<span');
     result = result.split('~lt~/span~gt~').join('</span>');
     result = result.split('~lt~br~gt~').join('<br>');
+    result = result.split('~lt~b~gt~').join('<b>');
+    result = result.split('~lt~/b~gt~').join('</b>');
     result = result.split('~lt~').join('&lt;');
     result = result.split('~gt~').join('>');
     result = result.split('~amp~').join('&');
