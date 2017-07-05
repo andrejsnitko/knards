@@ -99,16 +99,19 @@ class Collections {
     //                 [creation date]
     //                 [array with tag names (strings)]
     public function tagegize($cardSet) {
+        $result = array();
         foreach($cardSet as $card) {
-            $result[$card['id']]['id'] = $card['id'];
-            $result[$card['id']]['user_id'] = $card['user_id'];
-            $result[$card['id']]['content'] = $card['content'];
-            $result[$card['id']]['created_at'] = $card['created_at'];
-            $result[$card['id']]['tags'][] = $this->database->table('tags')->where('id', $card['tag_id'])->fetchField('tag_name');
-            $otherTags = $this->database->table('cards_tags')->where('tag_id != ?', $card['tag_id'])->where('card_id', $card['id'])->fetchAll();
-            if(count($otherTags) != 0)
-                foreach($otherTags as $tag)
-                    $result[$card['id']]['tags'][] = $this->database->table('tags')->where('id', $tag->tag_id)->fetchField('tag_name');
+            if(!array_key_exists($card['id'], $result)) {
+                $result[$card['id']]['id'] = $card['id'];
+                $result[$card['id']]['user_id'] = $card['user_id'];
+                $result[$card['id']]['content'] = $card['content'];
+                $result[$card['id']]['created_at'] = $card['created_at'];
+                $result[$card['id']]['tags'][] = $this->database->table('tags')->where('id', $card['tag_id'])->fetchField('tag_name');
+                $otherTags = $this->database->table('cards_tags')->where('tag_id != ?', $card['tag_id'])->where('card_id', $card['id'])->fetchAll();
+                if(count($otherTags) != 0)
+                    foreach($otherTags as $tag)
+                        $result[$card['id']]['tags'][] = $this->database->table('tags')->where('id', $tag->tag_id)->fetchField('tag_name');
+            }
         }
         return $result;
     }
