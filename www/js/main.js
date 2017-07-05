@@ -13,6 +13,22 @@ $(function() {
     if($('.login').length > 0) {
         
         
+        if($('ul.error').length > 0) {
+            if($('ul.error li').text() == 'auth-error') {
+                $('.auth-error').css('display', 'block');
+            }
+            if($('ul.error li').text().indexOf('key \'username') != -1) {
+                $('.login .modal-content').children('div:first').toggleClass('div-hide');
+                $('.login .modal-content').children('div:last').toggleClass('div-hide');
+                $('.uniq-username-error').css('display', 'block');
+            }
+            if($('ul.error li').text().indexOf('key \'email') != -1) {
+                $('.login .modal-content').children('div:first').toggleClass('div-hide');
+                $('.login .modal-content').children('div:last').toggleClass('div-hide');
+                $('.uniq-email-error').css('display', 'block');
+            }
+        }
+
         $('#btn-switch-login').on('click', function() {
             $('.login .modal-content').children('div:first').toggleClass('div-hide');
             $('.login .modal-content').children('div:last').toggleClass('div-hide');
