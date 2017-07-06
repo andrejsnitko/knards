@@ -440,7 +440,12 @@ $(function() {
             }
 
             $('.question').on('mousedown', spanToInput);
-            $('.question:first').trigger('mousedown');
+            var qCount = 0;
+            $('.question').each(function() {
+                $(this).attr('name', 'q' + qCount);
+                qCount++;
+            });
+            $('[name="q0"]').trigger('mousedown');
 
             $('#btn-know').on('click', function(event) {
                 event.preventDefault();
@@ -471,7 +476,12 @@ $(function() {
                     $('.score').text('You\'re score on this cards is: ' + cards[id]['score']);
 
                     $('.question').on('mousedown', spanToInput);
-                    $('.question:first').trigger('mousedown');
+                    var qCount = 0;
+                    $('.question').each(function() {
+                        $(this).attr('name', 'q' + qCount);
+                        qCount++;
+                    });
+                    $('[name="q0"]').trigger('mousedown');
                 } else {
                     // flag = 1 -> collection completed
                     // flag = 0 -> user has left the revising section (save all revised cards)
@@ -491,6 +501,7 @@ $(function() {
                         $(this).remove();
                     });
                     $(this).text("I don't know this");
+                    $('.card').focus();
                 }
                 else if($(this).text().indexOf('know') != -1) {
                         // Update this card
@@ -520,7 +531,12 @@ $(function() {
 
                         $(this).text("Show the answers");
                         $('.question').on('mousedown', spanToInput);
-                        $('.question:first').trigger('mousedown');
+                        var qCount = 0;
+                        $('.question').each(function() {
+                            $(this).attr('name', 'q' + qCount);
+                            qCount++;
+                        });
+                        $('[name="q0"]').trigger('mousedown');
                     } else {
                         // flag = 1 -> collection completed
                         // flag = 0 -> user has left the revising section (save all revised cards)
